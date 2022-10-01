@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         input.ng-pristine {
+            background-color: bisque;
+            }
+        input.ng-touched.ng-invalid {
+        /* background-color: red; */
+        outline: 2px solid red;
+        }
+        input.ng-touched.ng-valid {
+        /* background-color: green; */
+        outline: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="myAdd">
+        <form name="Form">
+            
+            <h1>Add Form</h1>
+            ID  <br>
+            <input type="text" required name="myID" id="myID" ng-model="myID" pattern="[E]\d{2}">
+            <span class="error" ng-show="Form.myID.$error.required">ID is Required</span>
+            <span class="error" ng-show="Form.myID.$error.pattern">ID has format Exx xdigit</span>
+            <br>
+        
+            Name <br>
+            <input type="text" required name="myName" id="myName" ng-model="myName"> 
+            <span class="error" ng-show="Form.myName.$error.required">Name is Required</span>
+            <br>
+        
+            Salary <br>
+            <input type="text" required name="mySalary" id="mySalary" ng-model="mySalary" pattern="\d{3,10}"> 
+            <span class="error" ng-show="Form.mySalary.$error.required">Salary is Required</span>
+            <span class="error" ng-show="Form.mySalary.$error.pattern">Invalid Salary (must >=100)</span>
+            <br>
+
+            Department <br>
+            <input type="text" required name="myDepartment" id="myDepartment" ng-model="myDepartment" >
+            <span class="error" ng-show="Form.myDepartment.$error.required">Department is Required</span>
+        
+            <br>
+            <input type="submit"    value="Add"    
+                                    name="Submit"  
+                                    ng-disabled="   Form.myID.$error.required || 
+                                                    Form.myName.$error.required ||  
+                                                    Form.mySalary.$error.required||
+                                                    Form.myDepartment.$error.required" 
+                                    ng-click="addFood();">
+        
+            
+    
+            </form>
+        
+          
+    </div>
+</body>
+</html>

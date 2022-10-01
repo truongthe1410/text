@@ -1,0 +1,21 @@
+nav{
+    border-bottom: 3px solid  #f90;
+    border-top: 3px solid  #f90;
+    width: 100%;
+    overflow: auto;
+}
+nav a{
+    width: 25%;
+    float:left;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 0;
+    color: blue
+}
+nav a:hover{
+    background-color: #f90;
+    border-radius:50%;
+    color:wheat;
+    text-decoration: none;
+}
+

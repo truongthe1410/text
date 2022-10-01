@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Menu.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .f90{
+            background-color: #f90;
+            color: aliceblue;
+            }
+        .border-f90{
+            border-top: 3px solid #f90;
+            border-bottom: 3px solid #f90;
+            }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="myApp"  class="container-fluid" >
+    <div class="border f90 my-2"><h1 class="text-center">AngularJS - Pretest</h1></div>
+    <nav>
+            <a href="#/!">Home</a>
+            <a href="#!List">Employee List</a>
+            <a href="#!Add">Add New Employee</a>
+            <a href="#!About">About Us</a>
+    </nav>
+
+    <div ng-view></div>
+
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function($routeProvider) {
+            $routeProvider
+            .when("/",{
+                templateUrl:"Index.html"
+            })
+            .when("/List",{
+                templateUrl:"listEmployee.html"
+            })
+            .when("/Add",{
+                templateUrl:"addEmployee.html"
+            })
+            .when("/About",{
+                templateUrl:"About.html"
+            });
+        });
+        app.run(function($rootScope, $http){
+            $http.get("Food.json").then(function(response){
+                $rootScope.myData = response.data.Food;
+            })
+        })
+
+        app.controller("myFood",function($scope){
+            $scope.removeItem = function(x){
+                $scope.myData.splice(x, 1)
+            }
+        })
+
+        app.controller("myAdd",function($scope){
+            $scope.addFood = function(){
+                var foods = {   
+                                ID: $scope.myID,
+                                Name: $scope.myName,
+                                Salary:$scope.mySalary,
+                                Department:$scope.myDepartment
+                            };
+                $scope.myData.push(foods);
+                alert("Add new food successfully");
+            }
+        })
+    </script>
+    <p>&copy; Copyright Fpt Aptech</p>
+</body>
+</html>
